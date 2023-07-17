@@ -1,0 +1,123 @@
+/* .sendIcon{
+    background: url("/src/images//send2.png")  no-repeat;
+} */
+
+.sendIcon{
+    background: url("/src/assets/images//sendIcon.svg")  no-repeat;
+}
+
+.cancelIcon{
+    background: url("/src/assets/images//cancel.svg")  no-repeat;
+}
+
+.confirmIcon{
+    background: url("/src/assets/images//confirm.svg")  no-repeat;
+}
+
+.profileIcon{
+    background: url("/src/assets/images//profile.svg")  no-repeat;
+}
+
+.addUserIcon{
+    background: url("/src/assets/images//addUser.svg")  no-repeat;
+}
+
+.NewContact{
+    background: url("/src/assets/images//newContact.svg")  no-repeat;
+}
+
+
+.logoutIcon{
+    background: url("/src/assets/images//logout.svg")  no-repeat;
+}
+
+.backIcon{
+    background: url("/src/assets/images//back.svg")  no-repeat;
+}
+
+.searchIcon{
+    background: url("/src/assets/images//search.svg")  no-repeat;
+}
+
+.menuIcon{
+    background: url("/src/assets/images//menu.svg")  no-repeat;
+}
+
+.HomeIcon{
+    background: url("/src/assets/images//home.svg")  no-repeat;
+}
+
+.lockIcon{
+    background: url("/src/assets/images//lock.svg")  no-repeat;
+}
+
+.mailIcon{
+    background: url("/src/assets/images//mail.svg")  no-repeat;
+}
+
+.menuButton:hover {  
+    filter: drop-shadow(.1rem .1rem 0.2rem rgb(88, 88, 88));
+    /* filter: blur(10px); */
+}
+.buttonCompo:hover {  
+    filter: drop-shadow(.1rem .1rem 0.2rem rgb(88, 88, 88));
+    /* filter: blur(10px); */
+}
+
+span .menuButton {
+    display:inline-block;
+    vertical-align: middle;
+}
+
+.buttonCompo {
+    display: block;
+    letter-spacing: .2rem;
+    margin-bottom: 8px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.notificationCompo {
+    display:block;
+    margin-bottom: 8px;
+    letter-spacing: .2rem;
+    position: relative;
+}
+
+.notificationTxt {
+    position: absolute;
+    right: 21px;
+    top: 16px;
+    background: red;
+    display: block;
+    text-align: center;
+    border-radius: 34px;
+    font-size: 11px;
+    color: white;
+    padding: 0 1px 0 1px;
+    letter-spacing: 0;
+}
+
+span .buttonTxt {
+    display:inline-block;
+    vertical-align: middle;
+    
+}
+
+/* .flexHeader .menuButton,
+.appMenu  .menuButton,
+.midContainer .menuButton */
+
+.menuButton{
+    height: 35px;
+    width: 35px;
+    background-size: 20px 20px;
+    border: none;
+    margin: 0px;
+    background-position: center center;
+    transition : ease 0.2s all;
+}
+
+.icon10 .menuButton{
+    background-size: 10px 10px;
+}
