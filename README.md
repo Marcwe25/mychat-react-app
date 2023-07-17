@@ -1,3 +1,3 @@
 # mychat-react-app
 
-[application online demo](www.wewehappy.com)
+[application online demo](https://www.wewehappy.com)
