@@ -47,7 +47,7 @@ mychat-react-app is a chat application built with React 18 that allows users to 
     ```
     The app will start running, and you can access it by opening http://localhost:3000 in your browser.
 
-    Usage
+## Usage
     Register and log in to the MyChat React App using your credentials.
     Start chatting with other users who are online.
     Enjoy real-time communication and stay connected!
