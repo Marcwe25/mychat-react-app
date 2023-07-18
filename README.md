@@ -24,27 +24,27 @@ mychat-react-app is a chat application built with React 18 that allows users to 
    git clone https://github.com/your-username/mychat-react-app.git
    ```
 
-Navigate to the project directory:
+2. Navigate to the project directory:
 
    ```shell
 cd mychat-react-app
    ```
 
-Install the dependencies:
+3. Install the dependencies:
 
    ```shell
 npm install
    ```
 
-Configure the MyChat Resource Server:
+4. Configure the myChat-resource-server:
 
-Open the src\utility\constsURL.js file in the project root directory and provide the necessary configuration values. Update the "server_url" variable with the URL of the  mychat-resource-server .
+    Open the src\utility\constsURL.js file in the project root directory and provide the necessary configuration values. Update the "server_url" variable with the URL of the  mychat-resource-server.
 
-Start the development server:
+5. Start the development server:
 
-shell
-Copy code
+```shell
 npm start
+```
 The app will start running, and you can access it by opening http://localhost:3000 in your browser.
 
 Usage
@@ -54,9 +54,9 @@ Enjoy real-time communication and stay connected!
 Deployment
 To deploy the MyChat React App to a production environment, build the app using:
 
-shell
-Copy code
+```shell
 npm run build
+```
 This will create a build directory with optimized and minified production-ready code. You can then deploy the contents of this directory to your hosting platform or server.
 
 Make sure to configure the appropriate environment variables for your production environment.
