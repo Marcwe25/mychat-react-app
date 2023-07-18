@@ -48,15 +48,15 @@ mychat-react-app is a chat application built with React 18 that allows users to 
     The app will start running, and you can access it by opening http://localhost:3000 in your browser.
 
 ## Usage
-    Register and log in to the MyChat React App using your credentials.
-    Start chatting with other users who are online.
-    Enjoy real-time communication and stay connected!
-    Deployment
-    To deploy the MyChat React App to a production environment, build the app using:
+Register and log in to the MyChat React App using your credentials.
+Start chatting with other users who are online.
+Enjoy real-time communication and stay connected!
+Deployment
+To deploy the MyChat React App to a production environment, build the app using:
 
-    ```shell
-    npm run build
-    ```
-    This will create a build directory with optimized and minified production-ready code. You can then deploy the contents of this directory to your hosting platform or server.
+```shell
+npm run build
+```
+This will create a build directory with optimized and minified production-ready code. You can then deploy the contents of this directory to your hosting platform or server.
 
-    Make sure to configure the appropriate environment variables for your production environment.
+Make sure to configure the appropriate environment variables for your production environment.
