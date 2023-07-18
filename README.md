@@ -49,9 +49,13 @@ mychat-react-app is a chat application built with React 18 that allows users to 
 
 ## Usage
 Register and log in to the MyChat React App using your credentials.
+
 Add registered friends by entering their email using the "add" button in the top menu.
+
 Start chatting with other users who are online.
+
 Enjoy real-time communication and stay connected!
+
 
 ## Deployment
 To deploy the MyChat React App to a production environment, build the app using:
