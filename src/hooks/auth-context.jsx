@@ -2,13 +2,14 @@ import { createContext, useContext } from "react";
 import { useState , useMemo} from "react";
 import jwtDecode from "jwt-decode";
 import useData from "./data-context";
+import { LOGIN_PAGE, REGISTRATION_PAGE } from "../utility/constNames"
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
     const [registeredMember,setRegisteredMember] = useState(null)
-    const {resetRoomHistory} = useData()
+    const {resetRoomHistory,chooseRoom} = useData()
 
     const login = async (data) => {
         resetRoomHistory()
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   
     const logout = () => {
         setRegisteredMember(null);
+        chooseRoom(LOGIN_PAGE)
     };
 
     function isTokenExpired (token_param){

@@ -17,8 +17,9 @@ import NotificatiolnList from '../roomsList/NotificationList';
 import "../css//ChatClient.css"
 
 const ChatUI = () => {
-    const { roomId} = useData()
+    const { roomId, roomHistory} = useData()
 
+    console.log("roomHistory",roomHistory)
     const {registeredMember} = useAuth()
     const {setUserDetail} = useAuthentication()
     const [chatMessages,setChatMessages] = useState([])

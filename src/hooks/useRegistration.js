@@ -2,11 +2,13 @@ import { useState } from 'react';
 import axios from "axios";
 import { apiURL,registerURL } from '../utility/constsURL';
 import { LOGIN_PAGE } from '../utility/constNames';
+import useData from './data-context'
 
 export default function useRegistration(props) {
    
     const [registrationError, setRegistrationError] = useState(null);
-	const goToPage = props.goToPage
+	// const goToPage = props.goToPage
+    const {chooseRoom} = useData()
 
    const axiosRegistration = axios.create(
         {
@@ -29,9 +31,11 @@ export default function useRegistration(props) {
                 ,{withCredentials: true})
             .then(async () => {
                 setRegistrationError("")
-                goToPage(LOGIN_PAGE)
+                // goToPage(LOGIN_PAGE)
+                chooseRoom(LOGIN_PAGE)
             })
-            .catch(() => {
+            .catch((error) => {
+                console.log("error",error)
                 setRegistrationError("bad credential");})
         }
 

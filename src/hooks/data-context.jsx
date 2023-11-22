@@ -1,14 +1,15 @@
 import { createContext, useContext } from "react";
 import { useRef } from "react";
 import { useState , useMemo} from "react";
+import { LOGIN_PAGE, REGISTRATION_PAGE } from "../utility/constNames"
 
 const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
 
-    const [roomHistory,setRoomHistory] = useState([0])
-    const [roomId,setRoomId] = useState(0)
-    const [currentRoom,setCurrentRoom] = useState(0) //remove this field ?????????
+    const [roomHistory,setRoomHistory] = useState([LOGIN_PAGE])
+    const [roomId,setRoomId] = useState(LOGIN_PAGE)
+    const [currentRoom,setCurrentRoom] = useState(LOGIN_PAGE) //remove this field ?????????
     const preRoomChange = useRef()
 
     
@@ -50,7 +51,8 @@ export const DataProvider = ({ children }) => {
         roomId,
         previousRoomId,
         currentRoom,
-        goBack
+        goBack,
+        roomHistory
       }),
       [roomId]
     );

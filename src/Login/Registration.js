@@ -23,8 +23,12 @@ function Registration(props) {
 	  
 	const submitHandler = async (event) => {
 		event.preventDefault();
-		await registerUser(inputs)
-
+		try {
+			await registerUser(inputs)
+		}
+		catch (error) {
+			console.log("error",error)
+		}
 	}
 
 	const goToLogin = () => {
@@ -86,7 +90,7 @@ function Registration(props) {
 
 					<input
 						className='p0'
-						type="email"  
+						type="password"  
 						name="password_confirmation" 
 						placeholder='confirm password'  
 						value={inputs.password_confirmation} 

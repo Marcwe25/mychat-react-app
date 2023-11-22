@@ -16,8 +16,8 @@ const MessageIcon = ({ post }) => {
         >
             <div className="message-header ">
                 <div className="messageTitle">
-                    <div className="messageTime ">`{ti.toUTCString()}`</div>
                     <div className="messageFrom">{post.from.username}</div>
+                    <div className="messageTime ">`{ti.toUTCString()}`</div>
                 </div>
 
             </div>

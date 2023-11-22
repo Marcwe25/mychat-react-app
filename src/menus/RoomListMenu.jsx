@@ -2,7 +2,8 @@ import SearchButton from '../icons/searchButton';
 import MenuButton from '../icons/MenuButton';
 import NotificationsMenu from './NotificationsMenu';
 import { useState } from 'react';
-import Cancel from '../icons/Cancel';
+// import Cancel from '../icons/Cancel';
+// import '../css/icons';
 
 export default function RoomListMenu (props) {
     const notificationList=props.notificationList
@@ -11,6 +12,7 @@ export default function RoomListMenu (props) {
     const setSearchInput = props.setSearchInput
 
     const togglePrompt = () => {
+        setSearchInput("")
         setIsPrompt(prevIsPrompt => !prevIsPrompt)
     }
 
@@ -47,7 +49,7 @@ export default function RoomListMenu (props) {
                         
                         </div> 
                     <span>
-                        <Cancel submitCancel={submitCancel}/>
+                        <div className='cancelIcon menuButton' onClick={togglePrompt}/>
                     </span>
                     </>
 

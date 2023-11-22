@@ -5,6 +5,8 @@ import { useEffect } from 'react'
 import GoogleLogin from './GoogleLogin'
 import { ACCESS_TOKEN } from '../utility/constNames'
 import RememberMe from './RememberMe'
+import useData from '../hooks/data-context'
+import { LOGIN_PAGE, REGISTRATION_PAGE } from "../utility/constNames"
 
 
 
@@ -29,6 +31,7 @@ function Login(props) {
 
 	},[remember])
 
+    const {chooseRoom} = useData()
 
 	const handleChange = (event) => {
 		const name = event.target.name;
@@ -43,7 +46,7 @@ function Login(props) {
 	}
 
 	const goToRegistration = () => {
-		goToPage("registration")
+		chooseRoom(REGISTRATION_PAGE)
 	}
  
 	return (
