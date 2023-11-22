@@ -25,8 +25,8 @@ const ChatInput = (props) => {
     };
 
     return (
-        <div className='listFoother border1'>
-            <form onSubmit={handleMessageSubmit} className='chatInputForm back_image border1'>
+        <div className='listFoother'>
+            <form onSubmit={handleMessageSubmit} className='chatInputForm back_image'>
                 <textarea className='back_image fborder newRoomTextArea' rows="4" cols="30" value={message} onChange={(e) => setMessage(e.target.value)}/>
                 <div className='sendIcon sendMessageButton' onClick={handleMessageSubmit}></div>
                 {/* <button type="submit" className='sendIcon sendMessageButton'></button> */}

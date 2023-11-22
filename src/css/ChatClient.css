@@ -31,8 +31,8 @@
 
 .listFoother {
     background-color: #d9d9d9;
-    bottom: 35px;
-    height: 60px;
+    bottom: 25px;
+    height: 80px;
     position: absolute;
     width: calc(100% - 32px);
     margin-left: 12px;
@@ -111,6 +111,9 @@ margin:0;
 .room-icon-name{
     width:33%;
     padding-left: 20px;
+    white-space:nowrap;
+    overflow-x: clip;
+    text-overflow: ellipsis;
 }
 
 .room-icon-unread{
@@ -124,6 +127,7 @@ margin:0;
     width: 50%;
     overflow-x: clip;
     text-overflow: ellipsis;
+    white-space:nowrap;
 }
 
 .message-icon-content{
@@ -192,7 +196,6 @@ margin:0;
     background-color:transparent;
     font-size: large;
     margin-left: 10px;
-    padding-top: 5px;
 
 }
 
@@ -214,11 +217,12 @@ span.standart {
 
 .chatInputForm {
     height: 100%;
-    padding-top: 20px;
+    padding-block: 5px;
     width: 100%;
     border-width: thin;
     border-style: solid;
-    margin-bottom: 20px;
+    border-radius:10px ;
+
 }
 
 
@@ -245,12 +249,11 @@ span.standart {
     transition : ease 0.2s all;
     position: absolute;
     display: inline-block;
-    margin-left: 11px;
+    margin-left: 37px;
+    margin-top: 43px;
+
     height: 35px;
     width: 35px;
-    /* border: none; */
-    /* vertical-align: middle; */
-    /* background-size: 35px 35px; */
 
 }
 
