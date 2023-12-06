@@ -1,18 +1,21 @@
-import { NEW_ROOM } from "../utility/constNames"
-import useData from '../hooks/data-context';
+import { useDispatch } from "react-redux"
+import { NEW_ROOM } from "../const/constNames"
+import { goToMenu } from "../containers/navigation/navigationAction"
 
 export default function AddUser () {
 
-    const {chooseRoom} = useData()
 
-    const handleClick = () => {
-      chooseRoom(NEW_ROOM)
-    }
+  const dispatch = useDispatch()
 
-    return (       
-      <span className="buttonCompo" onClick={handleClick}>
-          <div className='addUserIcon menuButton' />
-            <span className="buttonTxt">ADD CONTACT</span>
-      </span>
-    )
+  const handleClick = () => {
+      dispatch(goToMenu(NEW_ROOM))
+  }
+
+
+  return (       
+    <span className="buttonCompo" onClick={handleClick}>
+        <div className='addUserIcon menuButton' />
+        <span className="buttonTxt">ADD CONTACT</span>
+    </span>
+  )
 }

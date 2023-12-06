@@ -1,13 +1,15 @@
-import useData from '../hooks/data-context';
-import { ADD_TO_CHAT_PAGE } from "../utility/constNames"
+import { useDispatch } from "react-redux"
+import { ADD_TO_CHAT_PAGE } from "../const/constNames"
+import { goToMenu } from "../containers/navigation/navigationAction"
 
 
 export default function AddUserToChat () {
 
-  const {chooseRoom} = useData()
+  const dispatch = useDispatch()
+
 
   const handleClick = () => {
-    chooseRoom(ADD_TO_CHAT_PAGE)
+    dispatch(goToMenu(ADD_TO_CHAT_PAGE))
   }
 
     return (       

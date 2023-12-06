@@ -1,16 +1,21 @@
-import useData from '../hooks/data-context';
-import { PROFILE } from '../utility/constNames';
+import { useDispatch } from 'react-redux';
 import './icons.css';
+import { PROFILE } from '../const/constNames';
+import {ADD_TO_MENU_PATH} from '../containers/navigation/navigationReducer'
 
 
 
 export default function GoToProfile (props) {
 
-    const {chooseRoom} = useData()
+  const dispatch = useDispatch()
 
-    const handleClick = () => {
-        chooseRoom(PROFILE)
-      }
+  const handleClick = () => {
+      dispatch({
+          type:ADD_TO_MENU_PATH,
+          payload: PROFILE
+      })
+  }
+
 
     return (       
             // <div className='profileIcon menuButton' onClick={chooseRoom}/>
@@ -18,7 +23,7 @@ export default function GoToProfile (props) {
             <span className="buttonCompo" onClick={handleClick}>
                 <div className='profileIcon menuButton' />
                 <span className="buttonTxt">PROFILE</span>
-                </span>
+            </span>
 
     )
 

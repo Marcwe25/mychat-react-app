@@ -1,9 +1,7 @@
 
 
 export default function Loading () {
-    
-    return <div><p>LOADING...</p></div>
-    
+    return <div className="bouncingBallIcon iconThird"/>
 }
 
 

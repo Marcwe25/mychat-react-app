@@ -1,13 +1,15 @@
-import { NOTIFICATION_LIST } from "../utility/constNames"
-import useData from '../hooks/data-context';
+import { useDispatch } from "react-redux"
+import { NOTIFICATION_LIST } from "../const/constNames"
+import { goToMenu } from "../containers/navigation/navigationAction"
 
 export default function NotificationIcon (props) {
-    const {chooseRoom} = useData()
 
     const n = props.notifications.length
+    const dispatch = useDispatch()
 
     const handleClick = () => {
-        chooseRoom(NOTIFICATION_LIST+"_"+props.ntype)
+        // chooseRoom(NOTIFICATION_LIST+"_"+props.ntype)
+        dispatch(goToMenu(NOTIFICATION_LIST+"_"+props.ntype))
       }
 
     const cssClass = `menuButton ${props.ntype}`

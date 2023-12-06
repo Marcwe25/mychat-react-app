@@ -1,15 +1,15 @@
-import './icons.css';
-import useData from '../hooks/data-context';
+import { useDispatch } from "react-redux"
+import { ADD_TO_WINDOW_PATH } from "../containers/navigation/navigationReducer"
 
-export default function GoHomeIcon (props) {
+export default function GoHomeIcon () {
 
-
-    const {chooseRoom} = useData()
-    const cf = props.cf
+    const dispatch = useDispatch()
+    
     const goHome = () => {
-        if( typeof cf === 'function') {
-            cf()}
-        chooseRoom(0);
+        dispatch({
+            type:ADD_TO_WINDOW_PATH,
+            payload: 0
+        })
       }
 
     return  (          

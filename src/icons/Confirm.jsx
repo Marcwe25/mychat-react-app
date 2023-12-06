@@ -1,13 +1,13 @@
-import useData from '../hooks/data-context';
+import { useDispatch } from 'react-redux';
 import './icons.css';
 
 export default function Confirm (props) {
 
-    const {chooseRoom} = useData()
+    const dispatch = useDispatch()
 
     const handleConfirm = (e) => {
         typeof (props.submitConfirm) === 'function' && props.submitConfirm(e)
-        props.nextPage && chooseRoom(props.nextPage)
+        props.nextPage && dispatch(props.nextPage)
     }
 
     return (       

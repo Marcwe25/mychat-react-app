@@ -1,68 +1,70 @@
-# mychat-react-app
+# Getting Started with Create React App
 
-[application online demo](https://www.wewehappy.com)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Available Scripts
 
-mychat-react-app is a chat application built with React 18 that allows users to communicate in real-time. It works in conjunction with the mychat-resource-server to handle authentication and manage chat-related resources.
+In the project directory, you can run:
 
-## Features
+### `npm start`
 
-- Real-time chat functionality with SockJS and StomJS.
-- User authentication and authorization using OAuth2 or email/password authentication.
-- Responsive design for optimal viewing on different devices.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## Prerequisites
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-- Node.js installed on your system.
-- Access to the  mychat-resource-server (https://github.com/Marcwe25/mychat-ressource-server.git) or a deployed instance for authentication.
+### `npm test`
 
-## Getting Started
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-1. Clone this repository to your local machine:
+### `npm run build`
 
-   ```shell
-   git clone https://github.com/your-username/mychat-react-app.git
-   ```
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-2. Navigate to the project directory:
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-   ```shell
-    cd mychat-react-app
-   ```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-3. Install the dependencies:
+### `npm run eject`
 
-   ```shell
-    npm install
-   ```
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-4. Configure the myChat-resource-server:
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-    Open the src\utility\constsURL.js file in the project root directory and provide the necessary configuration values. Update the "server_url" variable with the URL of the  mychat-resource-server.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-5. Start the development server:
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-    ```shell
-    npm start
-    ```
-    The app will start running, and you can access it by opening http://localhost:3000 in your browser.
+## Learn More
 
-## Usage
-Register and log in to the MyChat React App using your credentials.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Add registered friends by entering their email using the "add" button in the top menu.
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-Start chatting with other users who are online.
+### Code Splitting
 
-Enjoy real-time communication and stay connected!
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
+### Analyzing the Bundle Size
 
-## Deployment
-To deploy the MyChat React App to a production environment, build the app using:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-```shell
-npm run build
-```
-This will create a build directory with optimized and minified production-ready code. You can then deploy the contents of this directory to your hosting platform or server.
+### Making a Progressive Web App
 
-Make sure to configure the appropriate environment variables for your production environment.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

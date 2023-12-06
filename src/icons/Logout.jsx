@@ -1,14 +1,15 @@
-import useAuthentication from "../hooks/useAuthentication"
+import { useDispatch } from "react-redux";
 import './icons.css';
+import { logoutUser } from "../containers/authentication/authActions";
 
 
 
 export default function Logout () {
 
-    const {logoutUser} = useAuthentication()
+    const dispatch = useDispatch()
 
     function handleLogout () {
-        logoutUser()
+        dispatch(logoutUser())
     }
 
     return (

@@ -1,16 +1,18 @@
-import useData from '../hooks/data-context';
+import { useDispatch } from 'react-redux';
 import './icons.css';
+import { goToPreviousMenu } from '../containers/navigation/navigationAction';
 
 
 export default function Cancel (props) {
 
-    const { goBack } = useData()
-    
+    const dispatch = useDispatch()
+
     const handleCancel = () => {
-        if (typeof props.submitCancel === 'function') {
-            props.submitCancel()
-        }
-        if(!props.isRedirect) goBack()
+        dispatch(goToPreviousMenu())
+        // if (typeof props.submitCancel === 'function') {
+        //     dispatch(goToPreviousMenu())
+        // }
+        // if(!props.isRedirect) dispatch(goToPreviousMenu())
     }
 
     return (       

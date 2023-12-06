@@ -1,14 +1,17 @@
-import useData from '../hooks/data-context';
-import { APP_MENU } from '../utility/constNames';
+import { useDispatch } from 'react-redux';
+import { APP_MENU } from '../const/constNames';
 import './icons.css';
-
+import {ADD_TO_MENU_PATH} from '../containers/navigation/navigationReducer'
 
 export default function MenuButton () {
 
-    const {chooseRoom} = useData()
+    const dispatch = useDispatch()
 
     const goToAppMenu = () => {
-        chooseRoom(APP_MENU)
+        dispatch({
+            type:ADD_TO_MENU_PATH,
+            payload: APP_MENU
+        })
     }
 
     return (       
