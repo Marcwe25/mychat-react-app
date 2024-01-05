@@ -4,15 +4,13 @@ import NotificationIcon from "../../icons/NotificationIcon"
 
 
 export default function NotificationsDisplay () {
-
-    const notificationList = useSelector((state) => state.notifications.entities)
-
+    const notifications = useSelector((state) => state.notifications.entities)
     return (
         <div className='notificationMenu'>
-        {notificationList && 
-            Object.keys(notificationList.notifications)
+        {notifications && 
+            Object.keys(notifications)
                     .map(type=> <NotificationIcon key={type}
-                                    notifications={notificationList.notifications[type]}
+                                    notifications={notifications[type]}
                                     ntype={type}
                                 />)
         }

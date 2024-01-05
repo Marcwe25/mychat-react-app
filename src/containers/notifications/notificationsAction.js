@@ -1,26 +1,7 @@
 import axiosInstance from "../../axiosInstanceGenerator"
 import { SUCCEEDED ,LOADING,FAILED} from "../../const/constNames"
 import { all_notifications_url } from "../../const/constsURL"
-import { NOTIFICATIONS_FETCH_SUCCESS, NOTIFICATIONS_SET_STATUS } from "./notificationsReducer"
-
-// export function aaa() {
-//     dispatch(setNotificationsStatus(LOADING))
-//     axiosInstance.get(all_notifications_url)
-//     .then(response => {
-//         console.log("notificationlistresponse.data",response.data)
-//         let notificationlist = response.data
-//             dispatch({
-//                 type:NOTIFICATIONS_FETCH_SUCCESS,
-//                 payload: notificationlist})
-//             dispatch(setNotificationsStatus(SUCCEEDED))
-
-
-//       })
-//       .catch(() => {
-//         dispatch(setNotificationsStatus(FAILED))
-
-//       })
-//   }
+import { NOTIFICATIONS_ADD_NOTIFICATION, NOTIFICATIONS_FETCH_SUCCESS, NOTIFICATIONS_SET_STATUS } from "./notificationsReducer"
 
 
   export function fetchNotifications () {
@@ -31,7 +12,6 @@ import { NOTIFICATIONS_FETCH_SUCCESS, NOTIFICATIONS_SET_STATUS } from "./notific
         .get(all_notifications_url)
         .then (
              (response) => {
-                console.log("fetchNotifications dispatch SET_ROOMS" , response?.data)
                 response?.data && dispatch({
                     type: NOTIFICATIONS_FETCH_SUCCESS,
                     payload: response?.data
@@ -40,7 +20,6 @@ import { NOTIFICATIONS_FETCH_SUCCESS, NOTIFICATIONS_SET_STATUS } from "./notific
         )
         .then (
             () => {
-                console.log("fetchRooms dispatch SUCCEEDED")
                 dispatch({
                     type:NOTIFICATIONS_SET_STATUS,
                     payload: SUCCEEDED
@@ -59,15 +38,16 @@ import { NOTIFICATIONS_FETCH_SUCCESS, NOTIFICATIONS_SET_STATUS } from "./notific
 }
 
   export function addNotification (notification)  {
-    dispatch({
-        type:"ADD_NOTIFICATION", 
-        payload: notification})
+    return async function dispatchNotification (dispatch) {
+        dispatch({
+            type:NOTIFICATIONS_ADD_NOTIFICATION,
+            payload:notification
+        })
+    }
 }
 
 export function setNotificationsStatus (status) {
-    console.log("setNotificationsStatus return dispatch",status)
     return function (dispatch) {
-        console.log("setNotificationsStatus",status )
         dispatch({
             type:NOTIFICATIONS_SET_STATUS,
             payload: status

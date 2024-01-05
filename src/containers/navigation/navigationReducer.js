@@ -1,4 +1,4 @@
-import { APP_MENU } from "../../const/constNames"
+import {  MAIN_WINDOWS } from "../../const/constNames"
 
 export const ADD_TO_WINDOW_PATH = "addToWindowPath"
 export const REMOVE_FROM_WINDOW_PATH = "removeFromWindowPath"
@@ -8,8 +8,8 @@ export const SET_WINDOW_PATH = "setWindowPath"
 export const SET_MENU_PATH = "setMenuPath"
 
 const initialState = {
-    windowPath:[0],
-    menuPath:[]
+    windowPath:[],
+    menuPath:[MAIN_WINDOWS]
 }
 
 const navigationReducer = (state=initialState, action) => {

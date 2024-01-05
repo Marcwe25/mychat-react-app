@@ -1,14 +1,16 @@
 import { useDispatch } from "react-redux"
-import { ADD_TO_WINDOW_PATH } from "../containers/navigation/navigationReducer"
+import { ADD_TO_MENU_PATH } from "../containers/navigation/navigationReducer"
+import { MAIN_WINDOWS } from "../const/constNames"
+import { refreshData } from "../containers/appData/appDataAction"
 
-export default function GoHomeIcon () {
+export default function GoHomeIcon ({withUserDataReset}) {
 
     const dispatch = useDispatch()
-    
     const goHome = () => {
+        withUserDataReset && dispatch(refreshData())
         dispatch({
-            type:ADD_TO_WINDOW_PATH,
-            payload: 0
+            type:ADD_TO_MENU_PATH,
+            payload: MAIN_WINDOWS
         })
       }
 
@@ -19,5 +21,3 @@ export default function GoHomeIcon () {
         </div>
     )
 }
-
-// listMenu

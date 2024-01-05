@@ -37,6 +37,11 @@
   }
 }
 
+.disabledRow {
+  background-color: white;
+  opacity: 50%;
+  pointer-events: none;
+}
 
 .pickerCompo:hover {  
   filter: drop-shadow(.1rem .1rem 0.2rem rgb(88, 88, 88));

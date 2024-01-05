@@ -1,5 +1,5 @@
-import { useEffect, useState, } from 'react';
-import { addUsersToRoom_url, editUsersInRoom_url } from '../../const/constsURL';
+import { useState, } from 'react';
+import { editUsersInRoom_url } from '../../const/constsURL';
 import Confirm from '../../icons/Confirm';
 import Cancel from '../../icons/Cancel';
 import axiosInstance from '../../axiosInstanceGenerator';
@@ -50,7 +50,6 @@ const AddToRoom = () => {
         return initialState
 
     }
-    console.log("initialstate", selectedContact)
     const submitConfirm = async () => {        
         await axiosInstance.put(editUsersInRoom_url+"/"+roomId, selectedContact)
 
@@ -73,7 +72,7 @@ const AddToRoom = () => {
                 <div className='flexHeader border1 inverseFlexDirection '>
                     <span className='standart'>
                         <Cancel />
-                        <Confirm submitConfirm={submitConfirm} nextPage={null}/>
+                        <Confirm submitConfirm={submitConfirm} nextPage={null} withUserDataReset={true}/>
                     </span>
                 </div>
 

@@ -1,4 +1,4 @@
-import { WS_INIT } from "./socketMiddleware"
+import { WS_CONFIRM_STATUS, WS_INIT, WS_SET_TO_CHAT } from "./socketMiddleware"
 
 export const SET_CLIENT_STATE = "client/set_state"
 
@@ -7,7 +7,6 @@ const initialState = {
 }
 
 const clientState = (state=initialState, action) => {
-
     switch (action.type) {
         case SET_CLIENT_STATE:
             return {
@@ -36,3 +35,21 @@ export function startWebSocket () {
         })
     }
 }
+
+export function setSocketChatRoomId (roomId) {
+    return function startWebSocketAction (dispatch) {
+        return dispatch({
+            type: WS_SET_TO_CHAT,
+            payload:roomId
+        })
+    }
+}
+
+export function confirmSocketState () {
+    return function startWebSocketAction (dispatch) {
+        return dispatch({
+            type: WS_CONFIRM_STATUS
+        })
+    }
+}
+

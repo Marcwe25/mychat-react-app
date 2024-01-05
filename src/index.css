@@ -1,4 +1,8 @@
 
+.gr {
+  background-color: rgb(199, 228, 156);
+}
+
 .field1 {
   outline: none;
   vertical-align: top;
@@ -123,7 +127,8 @@ background-repeat: repeat
   padding: 7px 25px 10px 25px;
   border-radius: 20px;
   margin-left: 15px  ;
-  margin-right: 15px;
+  margin-right: 5px;
+  margin-bottom: 5px;
   display:flex;
 }
 

@@ -13,7 +13,6 @@ export default function Logout () {
     }
 
     return (
-        // <div className='logoutIcon menuButton' onClick={handleLogout}/>
         <span className="buttonCompo" onClick={handleLogout}>
         <div className='logoutIcon menuButton' />
         <span className="buttonTxt">SIGN OUT</span>

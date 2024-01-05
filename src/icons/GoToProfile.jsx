@@ -5,7 +5,7 @@ import {ADD_TO_MENU_PATH} from '../containers/navigation/navigationReducer'
 
 
 
-export default function GoToProfile (props) {
+export default function GoToProfile () {
 
   const dispatch = useDispatch()
 
@@ -18,8 +18,6 @@ export default function GoToProfile (props) {
 
 
     return (       
-            // <div className='profileIcon menuButton' onClick={chooseRoom}/>
-
             <span className="buttonCompo" onClick={handleClick}>
                 <div className='profileIcon menuButton' />
                 <span className="buttonTxt">PROFILE</span>

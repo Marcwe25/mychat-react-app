@@ -1,13 +1,13 @@
 import axiosInstance from "../../axiosInstanceGenerator";
-import { IDLE, LOADING, SUCCEEDED } from "../../const/constNames";
-import { all_rooms_url, friends_url } from "../../const/constsURL";
+import { LOADING, } from "../../const/constNames";
+import { friends_url } from "../../const/constsURL";
 import { FRIENDS_STATUS, SET_FRIENDS } from "./friendsReducer";
 
 
 export function fetchFriends () {
     return async function (dispatch,getState) {
         if (getState().friends.status === LOADING) return (false)
-        setFriendsStatus(LOADING)
+        dispatch(setFriendsStatus(LOADING))
         axiosInstance
         .get(friends_url)
         .then (
@@ -18,12 +18,6 @@ export function fetchFriends () {
                     })
                 }
             
-        )
-        .then (
-            dispatch({
-                type: FRIENDS_STATUS,
-                payload: SUCCEEDED
-                })
         )
         .catch(
             err => console.error(err)

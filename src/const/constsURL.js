@@ -1,17 +1,19 @@
 
 
-export const server_url = 'http://localhost:8080'
-export const server_url2 = 'https://api.wewehappy.com/kchatbe'
+// export const server_url = 'http://localhost:8080'
+export const server_url = 'https://api.wewehappy.com/kchatbe'
 
 
 export const apiURL = server_url + '/api/v1'
 export const login_page_url = '/login'
+export const csrfURL = apiURL + '/csrf'
 
 export const ws_url = server_url + "/chat-room-websocket"
 
 export const authURL = apiURL+'/auth'
 export const loginURL = authURL+'/authenticate'
 export const registerURL = authURL+'/register'
+export const gcountURL = authURL+'/count/google'
 
 export const refresh_token_url = authURL+'/refresh-token'
 
@@ -28,6 +30,7 @@ export const all_rooms_url = member_url+"/rooms"
 export const addUserToRoom_url = room_url + "/addUserToRoom"
 export const addUsersToRoom_url = room_url + "/addUsersToRoom"
 export const editUsersInRoom_url = room_url + "/editUsersInRoom"
+export const removeRooms_url = room_url + "/removeRoomsForMembers"
 
 export const all_notifications_url = member_url + "/notifications"
 export const disable_rooms_url = room_url+"/true"

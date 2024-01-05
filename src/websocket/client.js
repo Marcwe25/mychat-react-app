@@ -1,34 +1,24 @@
-import SockJS from 'sockjs-client';
-import { Client } from '@stomp/stompjs';
-import { ws_url } from '../const/constsURL';
-import { ACCESS_TOKEN, AUTHORIZATION, LOADING } from '../const/constNames';
-import { ADD_MESSAGE } from '../containers/room/messages/messagesReducer';
+import { LOADING, SUCCEEDED } from '../const/constNames';
 import socket from './socket';
 import subscription from './subscription';
-import { SET_CLIENT_STATE } from './clientState';
+import { setClientState } from './clientState';
 
 const client = {
 
-    socket : socket,
+    socket : null,
     storeAPI:null,
-    subscription:subscription,
+    subscription:null,
 
-    initClient (storeAPI) {
-
-        if (storeAPI.getState().clientState.status === LOADING) return (false)
-
-        storeAPI.dispatch({
-            type: SET_CLIENT_STATE,
-            payload:LOADING
-        })
-
-        this.storeAPI = storeAPI
-
-        this.socket.initStompClient(this)
-        this.subscription.initSubscription(this)
-
-        console.log("going to activate")
-        this.socket.stompClient.activate()
+    async initClient (storeAPI) {
+      if (storeAPI.getState().clientState.status === LOADING) return (false)
+      storeAPI.dispatch(setClientState(LOADING))
+      this.socket = socket
+      this.subscription = subscription
+      this.storeAPI = storeAPI
+      this.socket.initStompClient(this)
+      this.subscription.initSubscription(this)
+      if (!this.socket.stompClient.active) await this.socket.stompClient.activate()
+      storeAPI.dispatch(setClientState(SUCCEEDED))
     },
 
     sendMessage (message) {
@@ -37,27 +27,30 @@ const client = {
         }
       },
     
-
       onConnectCallBack () {
-        console.log("onConnectCallBack this", this)
-
-        console.log("onConnectCallBack stompClient",socket )
-        console.log("onConnectCallBack this.storeAPI",client.storeAPI)
-        console.log("onConnectCallBack makeAllSubscription",subscription.makeAllSubscription)
-
         subscription.makeAllSubscription(socket.stompClient,client.storeAPI)
     },
 
-    down () {
-      this.socket.stompClient.deactivate()
-      this.subscription.onMessageCallback = null
-      this.subscription.messagingSubscription = null
-      this.subscription.systemSubscription = null
-      this.subscription.chatRoomId = null
-      this.subscription.client = null
-    }
+    async down () {
+      if(this.socket?.stompClient){
+        await this.socket.stompClient?.deactivate()
+        this.socket.stompClient = null
+      }
+      this.subscription && this.removeSubscribtion()
+      this.storeAPI?.dispatch(setClientState(null))
+    },
     
+    removeSubscribtion () {
+      if(this.subscription){
+        this.subscription.onMessageCallback = null
+        this.subscription.messagingSubscription = null
+        this.subscription.systemSubscription = null
+        this.subscription.chatRoomId = null
+        this.subscription.client = null
+        this.subscription = null
+      }
 
+    }
 }
 
 export default client

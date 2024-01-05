@@ -8,7 +8,6 @@ export default function NotificationIcon (props) {
     const dispatch = useDispatch()
 
     const handleClick = () => {
-        // chooseRoom(NOTIFICATION_LIST+"_"+props.ntype)
         dispatch(goToMenu(NOTIFICATION_LIST+"_"+props.ntype))
       }
 
@@ -17,7 +16,7 @@ export default function NotificationIcon (props) {
     return (
         <span className="notificationCompo" onClick={handleClick}>
             <div className={cssClass} />
-            <span className="notificationTxt">{n}</span>
+                <span className="notificationTxt">{n}</span>
         </span>
     )
 }

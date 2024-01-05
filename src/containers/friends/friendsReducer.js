@@ -1,8 +1,10 @@
+import { SUCCEEDED } from "../../const/constNames"
+
 export const FRIENDS_STATUS = "friends/state"
 export const SET_FRIENDS = "friends/set_friends"
 
 const initialState = {
-    entities:{},
+    entities:null,
     status:null
 }
 

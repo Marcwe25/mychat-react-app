@@ -1,45 +1,19 @@
 import {useSelector} from "react-redux"
-import RoomRow from "./RoomRow";
-import { useEffect } from "react";
-import RoomsMenu from "./RoomsMenu";
+import RoomRow from "../roomRow/RoomRow";
 
 export default function Rooms () {
 
     const rooms =  useSelector((state)=>state.rooms.entities)
+    const isTyping =  useSelector((state)=>state.isTyping.isTypingNotifications)
 
-    const roomsMap = Object.keys(rooms).map(room=> 
-        <RoomRow key={room} id={room}/>
+    const roomsMap = Object.keys(rooms).map(room_id=> 
+        <RoomRow key={room_id} id={room_id} typing={isTyping[room_id]}/>
     )
-
-
-
 
     return (<div className={`roomsContainer scrolable border1 back_image`}>
             
-            {!!rooms && roomsMap}
+            {!!roomsMap && roomsMap}
         </div>)
     
-
-
 }
 
-
-    // const friends = useSelector((state)=>state.friends.entities)
-
-    // useEffect (()=>{
-    //     if(rooms && friends) getRooms ()
-        
-    // },[rooms,friends])
-
-    // if(rooms && friends)  return getRooms ()
-
-
-
-
-
-
-    // function getRooms () {
-    //     return <div className={`roomsContainer scrolable border1 back_image`}>
-    //     {!!rooms && roomsMap}
-    // </div>
-    // }

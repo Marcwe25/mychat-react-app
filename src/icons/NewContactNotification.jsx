@@ -1,4 +1,4 @@
-import { NEW_ROOM, NEW_ROOM_MENU } from "../utility/constNames"
+import { NEW_ROOM } from "../utility/constNames"
 import useData from '../hooks/data-context';
 
 export default function NewContactNotification (props) {

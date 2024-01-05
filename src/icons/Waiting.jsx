@@ -1,5 +1,4 @@
 import Loading from "./Loading";
-import {Navigate} from "react-router-dom";
 import { useState } from "react";
 
 
@@ -21,7 +20,5 @@ export default function Waiting () {
     letMeTry ()
 
     return  <Loading />
-
-    // return isLoading ? <Loading /> : <Navigate to={'/login'} /> 
 
 }

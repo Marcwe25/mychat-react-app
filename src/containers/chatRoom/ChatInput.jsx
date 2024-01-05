@@ -1,16 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { WS_SEND_MESSAGE } from "../../websocket/socketMiddleware";
 
 export default function ChatInput () {
-
+    const dispatch = useDispatch()
     const [message, setMessage] = useState('');
 
     const roomId = useSelector((state) => state.navigation.windowPath.at(-1))
     const registeredMember = useSelector((state) => state.auth.registeredMember)
 
+    useEffect(()=>{
+        if(message && message.length>0) {
+            const destination = `/app/istyping/${roomId}`;
+            dispatch({
+                type: WS_SEND_MESSAGE,
+                payload : {
+                    destination: destination,
+                    message:{
+                        "dateTime": new Date(),
+                        "from":registeredMember,
+                        "content": "",
+                        "enabled": true.toString,
+                    }
+                }
+            })
 
-    const dispatch = useDispatch()
+        }
+
+    },[message])
+
+
 
     const handleMessageSubmit = (e) => {
         e.preventDefault();

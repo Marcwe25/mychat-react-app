@@ -2,8 +2,8 @@ import axios from "axios";
 import { apiURL, refresh_token_url} from './const/constsURL';
 import {BEARER} from "./const/constNames"
 import {store} from "./reduxConfig/store"
-
-    const n= Math.random()
+import { RESET_AUTHENTICATION, SET_GOOGLE_LOGIN, SET_TOKENS } from "./containers/authentication/authReducer";
+import { logoutUser } from "./containers/authentication/authActions";
 
     const axiosRefresh = axios.create(
         {
@@ -25,37 +25,54 @@ import {store} from "./reduxConfig/store"
         }
     )
 
-
-    // setAuthorizationHeader("Bearer ")
+    var refreshing = false
 
     function createAxiosResponseInterceptor() {
         const responseInterceptor = axiosInstance.interceptors.response.use(
             response => {
                 return response
             },
-            async (error) => {   
+            async (error) => {
                 const prevRequest = error?.config
+                const iss = store.getState().auth?.iss
                 if (error?.response?.status === 401 && !prevRequest.sent) {
+                    if(refreshing){
+                        setTimeout(500,()=>{
+                            return axiosInstance(prevRequest);
+                        })
+                    }
+                    refreshing=true
                     prevRequest.sent = true
                     //getting new tokens
                     const state = store.getState()
+                    
                     const refreshToken = state.auth.refreshToken
-                    const headerValue = BEARER + refreshToken
-                    const response = await axiosRefresh.post(refresh_token_url,{ "token" : headerValue })
+                    const token = {tokenValue : BEARER + refreshToken}
+                    const response = await axiosRefresh.post(refresh_token_url,token)
                     const tokens = response.data
                     // setting new tokens
                     store.dispatch({
-                        type:"setTokens",
+                        type:SET_TOKENS,
                         payload:tokens
                     })
-                    console.log("responseInterceptor axiosInstance",axiosInstance)
-                    console.log("responseInterceptor tokens",`Bearer ${tokens.access_token}`)
-
                     prevRequest.headers['Authorization'] = `Bearer ${tokens.access_token}`
+                    refreshing=false
                     return axiosInstance(prevRequest);
+                    
                 }
 
-                return Promise.reject(error);
+                switch (iss) {
+                    case "KCHAT":
+                        store.dispatch(logoutUser())
+                        break
+                    case "GOOGLE":
+                            store.dispatch({
+                            type:SET_GOOGLE_LOGIN,
+                            })
+                    default:
+                        return Promise.reject(error);
+                    }
+                
             }
         );
     }
@@ -68,7 +85,6 @@ import {store} from "./reduxConfig/store"
                   ...config,
                   headers: {
                     ...(accessToken !== null && { Authorization: `Bearer ${accessToken}` }),
-                    // ...(accessToken !== null && { Authorization: `Bearer abc` }),
                     ...config.headers,
                   },
                 };
@@ -76,11 +92,6 @@ import {store} from "./reduxConfig/store"
         );
 
     }
-
-    // function setAuthorizationHeader (token_param1) {
-    //     const headerValue = "Bearer " + token_param1
-    //     axiosInstance.defaults.headers.common['Authorization'] = headerValue    
-    // }
 
     createAxiosRequestInterceptor()
     createAxiosResponseInterceptor()

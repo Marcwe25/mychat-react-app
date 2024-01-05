@@ -1,36 +1,30 @@
 import axiosInstance from "../../axiosInstanceGenerator";
 import { LOADING, SUCCEEDED } from "../../const/constNames";
 import { all_rooms_url } from "../../const/constsURL";
-import { INCREMENT_UNREAD, RESET_UNREAD, ROOMS_STATUS, SET_ROOMS, UPDATE_LAST_POST } from "./roomsReducer";
+import {  setLastPosts } from "../roomRow/lastPostAction";
+import {  setUnreads } from "../roomRow/unreadAction";
+import { ROOMS_STATUS, ROOM_REMOVE, SET_ROOMS } from "./roomsReducer";
 
 
 export function fetchRooms () {
-    console.log("running fetchrooms")
     return async function (dispatch,getState) {
         if (getState().rooms.status === LOADING) return (false)
+        if (getState().friends.status !== SUCCEEDED) return (false)
         setRoomState(LOADING)
         axiosInstance
         .get(all_rooms_url)
         .then (
              (response) => {
-                console.log("fetchRooms dispatch SET_ROOMS")
+                const rooms = checkedRoomsName(response.data.rooms,getState)
 
+                dispatch(setLastPosts(response.data.lastPosts))
+                dispatch(setUnreads(response.data.unreads))
                 response?.data && dispatch({
                     type: SET_ROOMS,
-                    payload: response?.data.rooms
-                    }) 
-                }
+                    payload: rooms
+                })    
+                }  
         )
-        .then (
-            () => {
-                console.log("fetchRooms dispatch SUCCEEDED")
-                dispatch({
-                    type: ROOMS_STATUS,
-                    payload : SUCCEEDED
-                })
-            }
-           
-            )
         .catch(
             err => console.error(err)
         )
@@ -46,15 +40,6 @@ export function setRoomState (state) {
     }
 }
 
-export function setLastPost (message) {
-    return function (dispatch) {
-        dispatch({
-            type: UPDATE_LAST_POST,
-            payload: message
-        })
-    }
-}
-
 export function clearRooms () {
     return function (dispatch) {
         dispatch ({
@@ -65,20 +50,47 @@ export function clearRooms () {
     }
 }
 
-export function incrementUnread (roomid) {
+export function removeRoom (roomId) {
     return function (dispatch) {
+        console.log("remove action ",roomId )
         dispatch ({
-            type: INCREMENT_UNREAD,
-            payload: roomid
+            type: ROOM_REMOVE,
+            payload: roomId
         })
+        setRoomState(roomId)
     }
 }
 
-export function resetUnread (roomid) {
-    return function (dispatch) {
-        dispatch ({
-            type: RESET_UNREAD,
-            payload: roomid
-        })
-    }
+export function checkedRoomsName(rooms,getState){
+    const registeredMember = getState().auth.registeredMember
+    const friends = getState().friends.entities
+    Object.keys(rooms).forEach((roomId) => {
+        const room = rooms[roomId]
+        if(!room.name) {
+            room.name = roomName(room,friends,registeredMember)
+        }
+    })
+    return rooms
 }
+
+export function roomName (room,friends,registeredMember) {
+    
+    return room.members
+    .reduce(
+      (a, memberid) =>
+       memberid === registeredMember.id ? a :a + memberName(memberid,friends)  + ", " ,
+        ''
+        )
+    .slice(0, -2)
+  }
+
+  function memberName (memberid,friends) {
+    const friend = friends[memberid]
+    const output = friend.displayName ? friend.displayName : friend.username.split('@')[0]
+    return output
+  }
+
+
+
+
+

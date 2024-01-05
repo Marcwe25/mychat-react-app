@@ -1,66 +1,78 @@
 /* .sendIcon{
-    background: url("/src/images//send2.png")  no-repeat;
+    background: url("/src/images/send2.png")  no-repeat;
 } */
 
 .sendIcon{
-    background: url("/src/assets/images//sendIcon.svg")  no-repeat;
+    background: url("/src/assets/images/sendIcon.svg")  no-repeat;
 }
 
 .cancelIcon{
-    background: url("/src/assets/images//cancel.svg")  no-repeat;
+    background: url("/src/assets/images/cancel.svg")  no-repeat;
 }
 
 .confirmIcon{
-    background: url("/src/assets/images//confirm.svg")  no-repeat;
+    background: url("/src/assets/images/confirm.svg")  no-repeat;
 }
 
 .profileIcon{
-    background: url("/src/assets/images//profile.svg")  no-repeat;
+    background: url("/src/assets/images/profile.svg")  no-repeat;
 }
 
 .addUserIcon{
-    background: url("/src/assets/images//addUser.svg")  no-repeat;
+    background: url("/src/assets/images/addUser.svg")  no-repeat;
 }
 
 .NewContact{
-    background: url("/src/assets/images//newContact.svg")  no-repeat;
+    background: url("/src/assets/images/newContact.svg")  no-repeat;
 }
 
 
 .logoutIcon{
-    background: url("/src/assets/images//logout.svg")  no-repeat;
+    background: url("/src/assets/images/logout.svg")  no-repeat;
 }
 
 .backIcon{
-    background: url("/src/assets/images//back.svg")  no-repeat;
+    background: url("/src/assets/images/back.svg")  no-repeat;
 }
 
 .searchIcon{
-    background: url("/src/assets/images//search.svg")  no-repeat;
+    background: url("/src/assets/images/search.svg")  no-repeat;
 }
 
 .menuIcon{
-    background: url("/src/assets/images//menu.svg")  no-repeat;
+    background: url("/src/assets/images/menu.svg")  no-repeat;
 }
 
 .HomeIcon{
-    background: url("/src/assets/images//home.svg")  no-repeat;
+    background: url("/src/assets/images/home.svg")  no-repeat;
 }
 
 .lockIcon{
-    background: url("/src/assets/images//lock.svg")  no-repeat;
+    background: url("/src/assets/images/lock.svg")  no-repeat;
 }
 
 .mailIcon{
-    background: url("/src/assets/images//mail.svg")  no-repeat;
+    background: url("/src/assets/images/mail.svg")  no-repeat;
 }
 
 .loadingIcon{
-    background: url("/src/assets/images//loading.svg")  no-repeat;
+    background: url("/src/assets/images/loading.svg")  no-repeat;
 }
 
 .bouncingBallIcon{
-    background: url("/src/assets/images//bouncing-ball.svg")  no-repeat;
+    background: url("/src/assets/images/bouncing-ball.svg")  no-repeat;
+}
+
+.penIcon{
+    background: url("/src/assets/images/pen.svg")  no-repeat;
+    background-size: 20px 20px;
+    border: none;
+    margin: 0px;
+    background-position: center center;
+    transition: ease 0.2s all;
+    position: absolute;
+    left: 30%;
+    margin-top: 5px;
 }
 
 .menuButton:hover {  
@@ -139,4 +151,7 @@ span .buttonTxt {
     margin: 0px;
     background-position: center center;
     transition : ease 0.2s all;
+    background-position-y: bottom;
+    background-position-x: left;
+    
 }

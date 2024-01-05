@@ -2,6 +2,7 @@
   "name": "mychat-react-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://www.wewehappy.com",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@stomp/stompjs": "^7.0.0",

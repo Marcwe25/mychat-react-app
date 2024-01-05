@@ -3,9 +3,9 @@ import Confirm from '../../icons/Confirm';
 import Cancel from '../../icons/Cancel';
 import { useDispatch, useSelector } from 'react-redux';
 import { room_url } from '../../const/constsURL';
-import { goToPreviousMenu } from '../navigation/navigationAction';
 import axiosInstance from '../../axiosInstanceGenerator';
-import { setRoomState } from '../rooms/roomsAction';
+import GoHomeIcon from "../../icons/GoHomeIcon";
+import { refreshData } from '../appData/appDataAction';
 
 
 export default function NewContact () {
@@ -13,7 +13,6 @@ export default function NewContact () {
     
     const [errorMess, setErrorMess] = useState("")
     const [successMessage,setSuccessMessage]=useState("")
-
     const [input, setInput] = useState({username:"",message:""})
     const registeredMember =  useSelector((state)=>state.auth.registeredMember)
 
@@ -29,8 +28,8 @@ export default function NewContact () {
       const successful = async () => {
         setSuccessMessage("user added successfully")
         setTimeout(() => {
-            dispatch(setRoomState(null))
-            dispatch(goToPreviousMenu())
+            dispatch(refreshData())            
+            // dispatch(goToPreviousMenu())
         }, 2000);
     }
 
@@ -59,10 +58,15 @@ export default function NewContact () {
     return (
         <div >
             <div className='blockContainer'>
-            <div className='flexHeader border1 inverseFlexDirection '>
-                <span className='standart'>
+            <div className='flexHeader border1  '>
+                <span>
+                    <GoHomeIcon/>
+                </span>
+                <span className='standart inverseFlexDirection'>
                         <Cancel submitCancel={submitCancel}/>
-                        <Confirm submitConfirm={submitConfirm}/>
+                        <Confirm 
+                        submitConfirm={submitConfirm}
+                        />
                     </span>
                 </div>
             <div className='border1 back_image roomsContainer'>

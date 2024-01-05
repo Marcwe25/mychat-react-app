@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 import axiosInstance from "../../axiosInstanceGenerator";
-import Cancel from "../../icons/Cancel";
+import Decline from "../../icons/Decline";
 import Confirm from "../../icons/Confirm";
 import { linkToRoom_url, unlinkFromRoom_url } from '../../const/constsURL'
 import { fetchNotifications } from "./notificationsAction";
+import { WS_SUBSCRIBE_TO } from "../../websocket/socketMiddleware";
 
 export default function NotificationRow  (prop) {
 
@@ -17,7 +18,12 @@ export default function NotificationRow  (prop) {
       }
 
     const submitConfirm = async() => {
-      await axiosInstance.put(linkToRoom_url+"/" +notification.id)
+      const response = await axiosInstance.put(linkToRoom_url+"/" +notification.id)
+      const room = response.data
+      dispatch({
+        type: WS_SUBSCRIBE_TO,
+        payload: room.id
+      })
       dispatch(fetchNotifications())
       }
 
@@ -28,9 +34,8 @@ export default function NotificationRow  (prop) {
             
             <div className="room-icon-message">{prop.notification.from.username}</div>
             <div className="icon-container">
-            <Cancel
-              submitCancel={submitCancel}
-              isRedirect={true}
+            <Decline
+              callBack={submitCancel}
               />
             <Confirm
               submitConfirm={submitConfirm}
