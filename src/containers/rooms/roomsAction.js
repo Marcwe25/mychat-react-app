@@ -52,7 +52,6 @@ export function clearRooms () {
 
 export function removeRoom (roomId) {
     return function (dispatch) {
-        console.log("remove action ",roomId )
         dispatch ({
             type: ROOM_REMOVE,
             payload: roomId

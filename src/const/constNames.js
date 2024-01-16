@@ -26,3 +26,8 @@ export const OBSOLETE = "OBSOLETE"
 
 export const REMEMBERME = "REMEMBERME"
 export const CSRF_HEADER_NAME = "X-CSRF-TOKEN"
+
+export const NEW_CONTACT = "NewContact"
+export const CONTACT_ACCEPT = "ContactAccept"
+export const CONTACT_DECLINE = "ContactDecline"
+

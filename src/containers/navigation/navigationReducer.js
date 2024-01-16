@@ -1,47 +1,66 @@
-import {  MAIN_WINDOWS } from "../../const/constNames"
 
-export const ADD_TO_WINDOW_PATH = "addToWindowPath"
-export const REMOVE_FROM_WINDOW_PATH = "removeFromWindowPath"
-export const ADD_TO_MENU_PATH = "addToMenuPath"
-export const REMOVE_FROM_MENU_PATH = "removeFromMenuPath"
-export const SET_WINDOW_PATH = "setWindowPath"
-export const SET_MENU_PATH = "setMenuPath"
+
+export const NAVIGATION_PREFIX          = "nav_igation_"
+export const BROWSER_PREFIX          = "br_ow_ser"
+
+export const SET_NAVIGATION             = NAVIGATION_PREFIX+"SET_NAVIGATION"
+export const ADD_TO_NAVIGATION_PATH     = NAVIGATION_PREFIX+"ADD_TO_NAVIGATION_PATH"
+export const SET_NAVIGATION_PATH        = NAVIGATION_PREFIX+"SET_NAVIGATION_PATH"
+export const SET_POSITION               = NAVIGATION_PREFIX+"SET_POSITION"
+export const POSITIONN_INCREMENT        = NAVIGATION_PREFIX+"POSITIONN_INCREMENT"
+export const POSITIONN_DECREMENT        = NAVIGATION_PREFIX+"POSITIONN_DECREMENT"
+export const GO_TO_WINDOW                     = NAVIGATION_PREFIX+"GO_TO_WINDOW"
+export const SET_BROWSER_HISTORY_INDEX        = BROWSER_PREFIX+"BROWSER_POSITION"
+export const BROWSER_HISTORY_INCREMENT        = BROWSER_PREFIX+"BROWSER_HISTORY_INCREMENT"
+export const BROWSER_HISTORY_DECREMENT        = BROWSER_PREFIX+"BROWSER_HISTORY_DECREMENT"
 
 const initialState = {
-    windowPath:[],
-    menuPath:[MAIN_WINDOWS]
+    navigationPath:[],
+    navigationPosition:-1,
+    browserIndex:0
 }
 
 const navigationReducer = (state=initialState, action) => {
-
     switch (action.type) {
-        case ADD_TO_WINDOW_PATH:
-            const newPath = [...state.windowPath,action.payload]
+        case ADD_TO_NAVIGATION_PATH:
             return {...state,
-                windowPath:newPath,
-                menuPath:[],
+                navigationPath:[...state.navigationPath,action.payload],
             }
-
-        case SET_WINDOW_PATH:
+        case GO_TO_WINDOW:
             return {...state,
-                windowPath:action.payload,
+                navigationPath:[...state.navigationPath,action.payload],
+                navigationPosition:-1
             }
-        case SET_MENU_PATH:
+        case SET_NAVIGATION_PATH:
             return {...state,
-                menuPath:action.payload,
+                navigationPath:action.payload.navigationPath,
+                navigationPosition:action.payload.navigationPosition
             }
-        case ADD_TO_MENU_PATH:
-            const newMenuPath = [...state.menuPath,action.payload]
+        case SET_POSITION:
             return {...state,
-                menuPath:newMenuPath
+                navigationPosition:action.payload
             }
-        case REMOVE_FROM_WINDOW_PATH:
-            return { ...state,
-                windowPath: state.windowPath.slice(0,-1)
+        case POSITIONN_INCREMENT:
+            return {...state,
+                navigationPosition:state.navigationPosition+1
             }
-        case REMOVE_FROM_MENU_PATH:
-            return { ...state,
-                menuPath: state.menuPath.slice(0,-1)
+        case POSITIONN_DECREMENT:
+            return {...state,
+                navigationPosition:state.navigationPosition-1
+            }
+        case SET_BROWSER_HISTORY_INDEX:
+            return {...state,
+                browserIndex:action.payload
+            }
+        case BROWSER_HISTORY_INCREMENT:
+            const incr_index = state.browserIndex+1
+            return {...state,
+                browserIndex:incr_index
+            }
+        case BROWSER_HISTORY_DECREMENT:
+            const dec_index = state.browserIndex-1
+            return {...state,
+                browserIndex:dec_index
             }
         default:
             return state
@@ -49,3 +68,10 @@ const navigationReducer = (state=initialState, action) => {
 }
 
 export default navigationReducer
+
+
+export const selectPreviousWindow = (state) => state.navigation.navigationPath.at(state.navigation.navigationPosition);
+
+export const selectTargetWindow = (state) => state.navigation.navigationPath.at(-1);
+
+

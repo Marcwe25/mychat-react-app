@@ -25,11 +25,10 @@ export default function NewContact () {
         setErrorMess(null)
 	  }
 
-      const successful = async () => {
+      const onSuccess = async () => {
         setSuccessMessage("user added successfully")
         setTimeout(() => {
             dispatch(refreshData())            
-            // dispatch(goToPreviousMenu())
         }, 2000);
     }
 
@@ -47,7 +46,7 @@ export default function NewContact () {
               }
             axiosInstance.post(room_url,contactRequest)
             setInput({username:"",message:""});
-            successful()
+            onSuccess()
         }
     };
 

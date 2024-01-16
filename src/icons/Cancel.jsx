@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import './icons.css';
-import { goToPreviousMenu } from '../containers/navigation/navigationAction';
+import { APP_MENU } from '../const/constNames';
+import { goToWindow } from '../containers/navigation/navigationAction';
 
 
 export default function Cancel () {
@@ -8,7 +9,7 @@ export default function Cancel () {
     const dispatch = useDispatch()
 
     const handleCancel = () => {
-        dispatch(goToPreviousMenu())
+        dispatch(goToWindow(APP_MENU))
 
     }
 

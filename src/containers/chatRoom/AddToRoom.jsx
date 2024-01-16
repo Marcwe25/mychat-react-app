@@ -5,7 +5,8 @@ import Cancel from '../../icons/Cancel';
 import axiosInstance from '../../axiosInstanceGenerator';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRoomState } from '../rooms/roomsAction';
-import { goToPreviousMenu } from '../navigation/navigationAction';
+import { goToWindow } from '../navigation/navigationAction';
+import { selectTargetWindow } from '../navigation/navigationReducer';
 
 
 export const Checkbox = ({ isChecked, label, checkHandler, index }) => {
@@ -30,7 +31,7 @@ export const Checkbox = ({ isChecked, label, checkHandler, index }) => {
 
 const AddToRoom = () => {
     const registredMemberId = useSelector((state) => state.auth.registeredMember.id)
-    const roomId = useSelector((state) => state.navigation.windowPath.at(-1))
+    const roomId = useSelector(selectTargetWindow)
     const rooms =  useSelector((state)=>state.rooms.entities)
     const members = useSelector((state) => state.friends.entities)
     const [selectedContact, setSelectedContact] = useState(getInitialSelectedState());
@@ -52,10 +53,9 @@ const AddToRoom = () => {
     }
     const submitConfirm = async () => {        
         await axiosInstance.put(editUsersInRoom_url+"/"+roomId, selectedContact)
-
         setTimeout(() => {
             dispatch(setRoomState(null))
-            dispatch(goToPreviousMenu())
+            dispatch(goToWindow(roomId))
             setSelectedContact(null)
 
         }, 2000);

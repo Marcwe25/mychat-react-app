@@ -3,7 +3,7 @@ import axios from "axios";
 import {loginURL,apiURL,member_url} from '../../const/constsURL'
 import axiosInstance from "../../axiosInstanceGenerator";
 import { SET_ACCESS_TOKEN, SET_AUTHENTICATION, SET_ISS, SET_MEMBER, SET_REFRESH_TOKEN, SET_REMEMBERME, SET_TOKENS, SET_TOKEN_STATUS } from "./authReducer";
-import { resetMenuPath, resetWindowPath } from "../navigation/navigationAction";
+import { resetNavigation } from "../navigation/navigationAction";
 import { USER_LOGOUT } from "../../reduxConfig/reducersIndex";
 import { WS_DOWN } from "../../websocket/socketMiddleware";
 import { IDLE, REFRESH_TOKEN, REMEMBERME } from "../../const/constNames";
@@ -33,8 +33,8 @@ export const loginUser = (inputs,setAuthenticationError) => {
                 const state = getstate()
                 const remberMe = state.auth.remberMe
                 remberMe && localStorage.setItem(REFRESH_TOKEN,response.data[REFRESH_TOKEN]) && localStorage.setItem(REMEMBERME,"yesdo")
-                dispatch(resetMenuPath())
-                dispatch(resetMenuPath())
+                dispatch(resetNavigation())
+                dispatch(resetNavigation())
             dispatch(fetchRegisteredMember())
             } catch (error) {
                 setAuthenticationError("invalid credential, please try again")
@@ -45,9 +45,7 @@ export const loginUser = (inputs,setAuthenticationError) => {
 
 export const loginRemebered = () => {
     return async function loginUserThunkRemembered (dispatch) {
-        console.log("using remember me")
-        await dispatch(resetWindowPath())
-        await dispatch(resetMenuPath())
+        await dispatch(resetNavigation())
         const refreshToken = localStorage.getItem(REFRESH_TOKEN)
         await dispatch(setRefreshToken(refreshToken))
         await dispatch(fetchRegisteredMember())
@@ -56,7 +54,6 @@ export const loginRemebered = () => {
 
 export const setRememberMe = (rememberMe) => {
     return function (dispatch) {
-        console.log("setRememberMe",rememberMe)
         dispatch({
             type:SET_REMEMBERME,
             payload:rememberMe

@@ -1,5 +1,6 @@
 import axiosInstance from "../../../axiosInstanceGenerator"
 import { posts_for_room_url } from "../../../const/constsURL"
+import { selectTargetWindow } from "../../navigation/navigationReducer"
 import { ADD_MESSAGE, SET_MESSAGES } from "./messagesReducer"
 
 export function addMessage (message) {
@@ -13,7 +14,8 @@ export function addMessage (message) {
 
 export function fetchMessages () {
     return async function (dispatch,getState) {
-        const roomId = getState().navigation.windowPath.at(-1)
+        const roomId = selectTargetWindow(getState())
+        if(!roomId || isNaN(roomId)) throw new Error("no room id")
         axiosInstance
         .get(posts_for_room_url+`/${roomId}`)
         .then (

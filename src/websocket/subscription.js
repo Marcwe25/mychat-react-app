@@ -6,6 +6,8 @@ import { lastseen } from "../const/constsURL"
 import { updateLastPost } from "../containers/roomRow/lastPostAction"
 import { incrementUnread } from "../containers/roomRow/unreadAction"
 import { removeRoom } from "../containers/rooms/roomsAction"
+import { CONTACT_ACCEPT, CONTACT_DECLINE, NEW_CONTACT } from "../const/constNames"
+import { selectTargetWindow } from "../containers/navigation/navigationReducer"
 
 
 const subscription = {
@@ -14,7 +16,7 @@ const subscription = {
 
     initSubscription (client) {
         this.client = client
-        this.chatRoomId = this.client.storeAPI.getState().navigation.windowPath.at(-1)
+        this.chatRoomId = selectTargetWindow(this.client.storeAPI.getState())
     },
 
     makeAllSubscription () {
@@ -49,24 +51,20 @@ const subscription = {
 
         const notificationCallBack = (message) => {
             switch (message.type) {
-                case ContactDecline:
+                case CONTACT_DECLINE:
                     declineContactCallBack(message)
                     break;
-                case ContactAccept:
+                case CONTACT_ACCEPT:
                     acceptContactCallBack(message)
                     break;
-                case NewContact:
+                case NEW_CONTACT:
                     newContactCallBack(message)
                     break;
                 default:
                     break;
             }
         }
-
-        // this.makeSubscribe(`/user/queue/newContact`, newContactCallBack)
-        // this.makeSubscribe(`/user/queue/contactDecline`, declineContactCallBack)
         this.makeSubscribe(`/user/queue/notification`, notificationCallBack)
-
     },
 
     makeSubscribe (destination, callback) {

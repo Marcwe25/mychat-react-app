@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import './icons.css';
 import { PROFILE } from '../const/constNames';
-import {ADD_TO_MENU_PATH} from '../containers/navigation/navigationReducer'
+import { goToWindow } from '../containers/navigation/navigationAction';
 
 
 
@@ -10,10 +10,7 @@ export default function GoToProfile () {
   const dispatch = useDispatch()
 
   const handleClick = () => {
-      dispatch({
-          type:ADD_TO_MENU_PATH,
-          payload: PROFILE
-      })
+      dispatch(goToWindow(PROFILE))
   }
 
 

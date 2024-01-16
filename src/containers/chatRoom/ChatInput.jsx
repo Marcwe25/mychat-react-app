@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { WS_SEND_MESSAGE } from "../../websocket/socketMiddleware";
+import { selectTargetWindow } from "../navigation/navigationReducer";
 
 export default function ChatInput () {
     const dispatch = useDispatch()
     const [message, setMessage] = useState('');
 
-    const roomId = useSelector((state) => state.navigation.windowPath.at(-1))
+    const roomId = useSelector(selectTargetWindow)
     const registeredMember = useSelector((state) => state.auth.registeredMember)
 
     useEffect(()=>{

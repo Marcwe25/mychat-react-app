@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux"
 import { NOTIFICATION_LIST } from "../../const/constNames"
 import NotificationRow from "./NotificationRow"
+import { selectTargetWindow } from "../navigation/navigationReducer"
 
 export default function Notifications () {
 
-    const roomId = useSelector((state) => state.navigation.menuPath.at(-1))
+    const roomId = useSelector(selectTargetWindow)
+
     const notificationsByType = useSelector((state) => state.notifications.entities)
 
     const type = typeof roomId === 'string' && roomId.startsWith(NOTIFICATION_LIST) ? roomId.split("_")[1] : null

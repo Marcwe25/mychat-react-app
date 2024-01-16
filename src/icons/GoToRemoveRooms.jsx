@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { REMOVE_ROOMS } from "../const/constNames"
-import { goToMenu } from "../containers/navigation/navigationAction"
+import { goToWindow } from "../containers/navigation/navigationAction"
 
 export default function GoToRemoveRooms () {
 
@@ -8,7 +8,7 @@ export default function GoToRemoveRooms () {
   const dispatch = useDispatch()
 
   const handleClick = () => {
-      dispatch(goToMenu(REMOVE_ROOMS))
+      dispatch(goToWindow(REMOVE_ROOMS))
   }
 
 

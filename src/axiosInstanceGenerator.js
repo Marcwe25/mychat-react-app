@@ -44,11 +44,7 @@ import { logoutUser } from "./containers/authentication/authActions";
                     refreshing=true
                     prevRequest.sent = true
                     //getting new tokens
-                    const state = store.getState()
-                    
-                    const refreshToken = state.auth.refreshToken
-                    const token = {tokenValue : BEARER + refreshToken}
-                    const response = await axiosRefresh.post(refresh_token_url,token)
+                    const response = await axiosRefresh.post(refresh_token_url)
                     const tokens = response.data
                     // setting new tokens
                     store.dispatch({

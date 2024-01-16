@@ -5,11 +5,12 @@ import ChatMenu from "./ChatMenu";
 import { confirmSocketState, setSocketChatRoomId } from "../../websocket/clientState";
 import { useEffect } from "react";
 import { resetUnread } from "../roomRow/unreadAction";
+import { selectTargetWindow } from "../navigation/navigationReducer";
 
 
 export default function ChatUI ()  {
     const dispatch = useDispatch();
-    const roomId = useSelector((state) => state.navigation.windowPath.at(-1))
+    const roomId = useSelector(selectTargetWindow)
     const roomName = useSelector((state) => state.rooms.entities[roomId].name)
 
     useEffect(()=>{

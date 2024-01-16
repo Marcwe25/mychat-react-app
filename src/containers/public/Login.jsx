@@ -31,7 +31,6 @@ function Login({ selectPage }) {
   async function gcount() {
     const response = await axios.get(gcountURL);
     const count = response.data;
-    console.log("gcount", count);
     if (count < 50) {
       setShowGoogle(true);
     } else {
@@ -42,12 +41,6 @@ function Login({ selectPage }) {
   useEffect(() => {
     gcount();
     const docheckremember = localStorage.getItem(REMEMBERME);
-    console.log(
-      "docheckremember",
-      docheckremember,
-      docheckremember === "yesdo"
-    );
-
     if (docheckremember === "yesdo") {
       dispatch(loginRemebered());
     } else {
@@ -55,8 +48,6 @@ function Login({ selectPage }) {
     }
   }, []);
 
-  dispatch(setRememberMe(localStorage.getItem(REMEMBERME)));
-  dispatch(setRefreshToken(localStorage.getItem(REFRESH_TOKEN)));
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -92,7 +83,7 @@ function Login({ selectPage }) {
               className="p0"
               type="text"
               name="username"
-              placeholder="username"
+              placeholder="email"
               value={inputs.username}
               onChange={handleChange}
             />

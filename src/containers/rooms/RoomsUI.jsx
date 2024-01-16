@@ -2,7 +2,7 @@ import Rooms from "./Rooms";
 import RoomsMenu from "./RoomsMenu";
 
 
-export default function RoomUI () {
+export default function RoomsUI () {
 
     return (
         <div className='blockContainer '>

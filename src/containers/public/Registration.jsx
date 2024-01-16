@@ -20,11 +20,23 @@ function Registration({selectPage}) {
 
     const registerUser = async (inputs) => {
         if(isValid(inputs)) {
-            const {userName,email,password} = {...inputs}
+            const {
+				displayName,
+				given_name,
+				family_name,
+				email,
+				password
+			} = {...inputs}
             return await axiosRegistration
             .post(
                 registerURL,
-                {userName,email,password}
+                {
+					displayName,
+					given_name,
+					family_name,
+					email,
+					password
+				}
                 ,{withCredentials: true})
             .then(async () => {
                 setRegistrationError("")
@@ -45,7 +57,9 @@ function Registration({selectPage}) {
 
 
 	const [inputs, setInputs] = useState({
-		userName:"",
+		family_name:"",
+		given_name:"",
+		displayName:"",
 		email:"",
 		password_confirmation:"",
 		password:""})
@@ -70,20 +84,45 @@ function Registration({selectPage}) {
 		<div className="login-container back_image">
 			<form method="post" onSubmit={submitHandler}>
 			<p className='loginTitle'> <span className='big'>Register on </span><span className='bigger headerTitle '>K</span> <span className='big'>chat</span></p>
-			
+
+				<div className='inputField'>
+					<div className='profileIcon iconPlacement'/>
+
+					<input
+						className='p0'
+						type="text"  
+						name="displayName" 
+						placeholder='displayName'  
+						value={inputs.displayName} 
+						onChange={handleChange}
+						/>
+				</div>
+							
 			<div className='inputField'>
 					<div className='profileIcon iconPlacement'/>
 
 					<input
 						className='p0'
-						type="userName"  
-						name="userName" 
-						placeholder='username'  
-						value={inputs.userName} 
+						type="text"  
+						name="given_name" 
+						placeholder='given name'  
+						value={inputs.given_name} 
 						onChange={handleChange}
 						/>
 				</div>
 
+				<div className='inputField'>
+					<div className='profileIcon iconPlacement'/>
+
+					<input
+						className='p0'
+						type="text"  
+						name="family_name" 
+						placeholder='family name'  
+						value={inputs.family_name} 
+						onChange={handleChange}
+						/>
+				</div>
 
 				<div className='inputField'>
 					<div className='mailIcon iconPlacement'/>

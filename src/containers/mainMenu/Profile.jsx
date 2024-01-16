@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import Cancel from '../../icons/Cancel'
 import Confirm from '../../icons/Confirm'
 import { member_url } from '../../const/constsURL'
-import { goToPreviousMenu } from '../navigation/navigationAction'
 import { fetchRegisteredMember } from '../authentication/authActions'
 
 export default function Profile () {
@@ -25,20 +24,17 @@ export default function Profile () {
 	  }
 
 
-	const successful = () => {
+	const onSuccess = () => {
         setSuccess("updated successfully")
 		dispatch(fetchRegisteredMember())
-        setTimeout(() => {
-            dispatch(goToPreviousMenu())
 
-        }, 2000);
     }
 
 
     const UpdateUser = async (e) => {
 		e.preventDefault();
         await axiosInstance.put(member_url, inputs,{withCredentials: true})
-        successful()
+        onSuccess()
         }
 
 

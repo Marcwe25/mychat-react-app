@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { goToWindow } from "../navigation/navigationAction"
-import React, { useRef } from "react"
+import React from "react"
 import Writing from "../../icons/Writing"
 
 

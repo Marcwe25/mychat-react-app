@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { NOTIFICATION_LIST } from "../const/constNames"
-import { goToMenu } from "../containers/navigation/navigationAction"
+import { goToWindow } from "../containers/navigation/navigationAction"
 
 export default function NotificationIcon (props) {
 
@@ -8,7 +8,7 @@ export default function NotificationIcon (props) {
     const dispatch = useDispatch()
 
     const handleClick = () => {
-        dispatch(goToMenu(NOTIFICATION_LIST+"_"+props.ntype))
+        dispatch(goToWindow(NOTIFICATION_LIST+"_"+props.ntype))
       }
 
     const cssClass = `menuButton ${props.ntype}`
