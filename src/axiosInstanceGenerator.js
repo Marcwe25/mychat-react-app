@@ -1,8 +1,7 @@
 import axios from "axios";
 import { apiURL, refresh_token_url} from './const/constsURL';
-import {BEARER} from "./const/constNames"
 import {store} from "./reduxConfig/store"
-import { RESET_AUTHENTICATION, SET_GOOGLE_LOGIN, SET_TOKENS } from "./containers/authentication/authReducer";
+import { SET_GOOGLE_LOGIN, SET_TOKENS } from "./containers/authentication/authReducer";
 import { logoutUser } from "./containers/authentication/authActions";
 
     const axiosRefresh = axios.create(
@@ -33,7 +32,9 @@ import { logoutUser } from "./containers/authentication/authActions";
                 return response
             },
             async (error) => {
+
                 const prevRequest = error?.config
+                console.log("Interceptor",{"error":error},{"prevRequest.sent":prevRequest.sent},{"refreshing":refreshing})
                 if (error?.response?.status === 401 && !prevRequest.sent) {
                     if(refreshing){
                         setTimeout(500,()=>{
@@ -42,44 +43,31 @@ import { logoutUser } from "./containers/authentication/authActions";
                     }
                     refreshing=true
                     prevRequest.sent = true
-                    try {
                     //getting new tokens
-                    const response = await axiosRefresh.post(refresh_token_url)
-                    const tokens = response.data
-                    // setting new tokens
-                    store.dispatch({
-                        type:SET_TOKENS,
-                        payload:tokens
-                    })
-                    prevRequest.headers['Authorization'] = `Bearer ${tokens.access_token}`
-                    refreshing=false
-                    return axiosInstance(prevRequest);
-                    }
-                    catch {
-                        const iss = store.getState().auth?.registeredMember?.iss
+                    try{
+                        const response = await axiosRefresh.post(refresh_token_url)
+                        const tokens = response.data
+                        // setting new tokens
+                        store.dispatch({
+                            type:SET_TOKENS,
+                            payload:tokens
+                        })
+                        prevRequest.headers['Authorization'] = `Bearer ${tokens.access_token}`
+                        refreshing=false
+                        return axiosInstance(prevRequest);
+                    } catch {
 
-                        switch (iss) {
-                            case "KCHAT":
-                                store.dispatch(logoutUser())
-                                break
-                            case "GOOGLE":
-                                    store.dispatch({
-                                    type:SET_GOOGLE_LOGIN,
-                                    })
-                            default:
-                                store.dispatch(logoutUser())
-                            }
                     }
 
-                    
                 }
-
+                return promptToLogin();
                 
             }
         );
     }
     
     function createAxiosRequestInterceptor() {
+
         const requestInterceptor = axiosInstance.interceptors.request.use(
             (config) => {
                 const accessToken = store.getState().auth.accessToken
@@ -95,7 +83,24 @@ import { logoutUser } from "./containers/authentication/authActions";
 
     }
 
+    function promptToLogin() {
+        const iss = store.getState().auth?.registeredMember?.iss
+        console.log("prompting to login",iss)
+        switch (iss) {
+            case "KCHAT":
+                store.dispatch(logoutUser());
+                break;
+            case "GOOGLE":
+                store.dispatch({
+                    type: SET_GOOGLE_LOGIN,
+                });
+            default:
+                return store.dispatch(logoutUser());;
+        }
+    }
+
     createAxiosRequestInterceptor()
     createAxiosResponseInterceptor()
 
     export default axiosInstance
+
