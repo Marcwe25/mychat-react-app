@@ -42,6 +42,7 @@ import { logoutUser } from "./containers/authentication/authActions";
                     }
                     refreshing=true
                     prevRequest.sent = true
+                    try {
                     //getting new tokens
                     const response = await axiosRefresh.post(refresh_token_url)
                     const tokens = response.data
@@ -53,21 +54,26 @@ import { logoutUser } from "./containers/authentication/authActions";
                     prevRequest.headers['Authorization'] = `Bearer ${tokens.access_token}`
                     refreshing=false
                     return axiosInstance(prevRequest);
+                    }
+                    catch {
+                        const iss = store.getState().auth?.registeredMember?.iss
+
+                        switch (iss) {
+                            case "KCHAT":
+                                store.dispatch(logoutUser())
+                                break
+                            case "GOOGLE":
+                                    store.dispatch({
+                                    type:SET_GOOGLE_LOGIN,
+                                    })
+                            default:
+                                store.dispatch(logoutUser())
+                            }
+                    }
+
                     
                 }
-                const iss = store.getState().auth?.registeredMember?.iss
 
-                switch (iss) {
-                    case "KCHAT":
-                        store.dispatch(logoutUser())
-                        break
-                    case "GOOGLE":
-                            store.dispatch({
-                            type:SET_GOOGLE_LOGIN,
-                            })
-                    default:
-                        return Promise.reject(error);
-                    }
                 
             }
         );
