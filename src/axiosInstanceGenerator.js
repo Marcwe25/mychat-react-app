@@ -34,7 +34,6 @@ import { logoutUser } from "./containers/authentication/authActions";
             },
             async (error) => {
                 const prevRequest = error?.config
-                const iss = store.getState().auth?.iss
                 if (error?.response?.status === 401 && !prevRequest.sent) {
                     if(refreshing){
                         setTimeout(500,()=>{
@@ -56,6 +55,7 @@ import { logoutUser } from "./containers/authentication/authActions";
                     return axiosInstance(prevRequest);
                     
                 }
+                const iss = store.getState().auth?.registeredMember?.iss
 
                 switch (iss) {
                     case "KCHAT":
@@ -93,4 +93,3 @@ import { logoutUser } from "./containers/authentication/authActions";
     createAxiosResponseInterceptor()
 
     export default axiosInstance
-

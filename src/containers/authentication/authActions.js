@@ -2,7 +2,7 @@
 import axios from "axios";
 import {loginURL,apiURL,member_url} from '../../const/constsURL'
 import axiosInstance from "../../axiosInstanceGenerator";
-import { SET_ACCESS_TOKEN, SET_AUTHENTICATION, SET_ISS, SET_MEMBER, SET_REFRESH_TOKEN, SET_REMEMBERME, SET_TOKENS, SET_TOKEN_STATUS } from "./authReducer";
+import { SET_ACCESS_TOKEN, SET_AUTHENTICATION, SET_MEMBER, SET_REFRESH_TOKEN, SET_REMEMBERME, SET_TOKENS, SET_TOKEN_STATUS } from "./authReducer";
 import { resetNavigation } from "../navigation/navigationAction";
 import { USER_LOGOUT } from "../../reduxConfig/reducersIndex";
 import { WS_DOWN } from "../../websocket/socketMiddleware";
@@ -32,8 +32,8 @@ export const loginUser = (inputs,setAuthenticationError) => {
 
                 const state = getstate()
                 const remberMe = state.auth.remberMe
+
                 remberMe && localStorage.setItem(REFRESH_TOKEN,response.data[REFRESH_TOKEN]) && localStorage.setItem(REMEMBERME,"yesdo")
-                dispatch(resetNavigation())
                 dispatch(resetNavigation())
             dispatch(fetchRegisteredMember())
             } catch (error) {
@@ -87,14 +87,6 @@ export const setRegisteredMember = (member) => {
     }
 }
 
-export const setMemberFromGoogle = () => {
-    return function (dispatch) {
-        dispatch({
-            type:SET_ISS,
-            payload:"GOOGLE"
-            })
-    }
-}
 
 export const logoutUser = () => {
     return async function logout (dispatch) {
@@ -105,7 +97,6 @@ export const logoutUser = () => {
                 accessToken:null,
                 refreshToken:null,
                 rememberMe:null,
-                iss: null
             }
         })
         dispatch({type:WS_DOWN})
@@ -125,10 +116,6 @@ export const fetchRegisteredMember = ()=>{
                         type: SET_MEMBER,
                         payload: response?.data
                         })
-                        && dispatch({
-                            type: SET_ISS,
-                            payload: "KCHAT"
-                            })
                     } 
                 
             )

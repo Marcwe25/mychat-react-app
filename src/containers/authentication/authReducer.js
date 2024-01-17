@@ -7,7 +7,6 @@ export const SET_REMEMBERME = "AUTHENTICATION/SET_REMEMBERME"
 export const SET_TOKEN_STATUS = "AUTHENTICATION/SET_TOKEN_STATUS"
 export const RESET_AUTHENTICATION = "AUTHENTICATION/RESET_AUTHENTICATION"
 export const SET_GOOGLE_LOGIN = "AUTHENTICATION/SET_GOOGLE_LOGIN"
-export const SET_ISS = "AUTHENTICATION/SET_ISS"
 
 
 const authReducer = (
@@ -17,7 +16,6 @@ const authReducer = (
         accessToken:null,
         refreshToken:null,
         remberMe:null,
-        iss:null,
     },
     action) => {
 
@@ -46,10 +44,6 @@ const authReducer = (
         case SET_AUTHENTICATION:
             return {...action.payload}
         
-        case SET_ISS:
-            return {...state,
-                iss:action.payload
-            }
         case SET_REMEMBERME:
             return {...state,
                 remberMe:action.payload

@@ -5,7 +5,7 @@ import GoogleLoginModal from "./GoogleLoginModal"
 
 export default function AuthRequired () {
     const registeredMember =  useSelector((state)=>state.auth.registeredMember)
-    const iss =  useSelector((state)=>state.auth.iss)
+    const iss =  useSelector((state)=>state.auth?.registeredMember?.iss)
     if(!registeredMember && iss==="GOOGLE") return (
         <>
             <GoogleLoginModal/>

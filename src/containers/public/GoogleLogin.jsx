@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { googleClientId } from "../../const/ids"
 import { useDispatch } from "react-redux"
 import axiosInstance from "../../axiosInstanceGenerator"
-import { setAccessToken, setMemberFromGoogle, setRefreshToken, setRegisteredMember } from "../authentication/authActions"
+import { setAccessToken, setRefreshToken, setRegisteredMember } from "../authentication/authActions"
 import { setDataStatus } from "../appData/appDataAction"
 
 const loadScript = (src) =>
@@ -28,7 +28,6 @@ export default function GoogleLogin() {
         //setting in store
         const member = response.data.member
         const tokens = response.data.authorization
-        dispatch(setMemberFromGoogle())
         dispatch(setRegisteredMember(member))
         dispatch(setAccessToken(tokens.access_token))
         dispatch(setRefreshToken(tokens.refresh_token))
