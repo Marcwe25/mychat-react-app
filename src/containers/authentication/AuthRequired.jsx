@@ -4,8 +4,8 @@ import PublicRouter from "../public/PublicRouter"
 import GoogleLoginModal from "./GoogleLoginModal"
 
 export default function AuthRequired () {
-    const registeredMember =  useSelector((state)=>state.auth.registeredMember)
-    const iss =  useSelector((state)=>state.auth?.registeredMember?.iss)
+    const registeredMember =  useSelector((state)=>state.auth?.registeredMember)
+    const iss =  useSelector((state)=>state.auth?.iss)
     if(!registeredMember && iss==="GOOGLE") return (
         <>
             <GoogleLoginModal/>

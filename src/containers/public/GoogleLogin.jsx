@@ -27,10 +27,9 @@ export default function GoogleLogin() {
 
         //setting in store
         const member = response.data.member
-        const tokens = response.data.authorization
+        const access_token = response.data.access_token
         dispatch(setRegisteredMember(member))
-        dispatch(setAccessToken(tokens.access_token))
-        dispatch(setRefreshToken(tokens.refresh_token))
+        dispatch(setAccessToken(access_token))
 
         //reload user data
         dispatch(setDataStatus(null))
